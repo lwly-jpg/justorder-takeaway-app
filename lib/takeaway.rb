@@ -16,4 +16,10 @@ class Takeaway
       @terminal.puts "#{item} : #{price}"
     end
   end
+
+  def add_item
+    @terminal.puts "Input what item you'd like to order:"
+    item_selection = @terminal.gets.chomp.capitalize
+    @terminal.puts "1 x #{item_selection} added to your order"
+  end
 end

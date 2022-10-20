@@ -20,6 +20,15 @@ describe Takeaway do
       new_customer.show_menu
     end
 
+    it 'returns user order input' do
+      terminal = double :terminal
+      expect(terminal).to receive(:puts).with("Input what item you'd like to order:")
+      expect(terminal).to receive(:gets).and_return("burger")
+      expect(terminal).to receive(:puts).with("1 x Burger added to your order")
+      new_customer = Takeaway.new(terminal)
+      new_customer.add_item
+    end
+
 
   end
 
