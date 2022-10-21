@@ -9,79 +9,100 @@ As a customer so that I can
 ## 2. Class System
 
 ```ruby
+
 class Takeaway
-  MENU = {}
-  
-  
   def initialize
-  end
-
-  def options
-    # loop do
-    #   print_options
-    #   process(STDIN.gets.chomp)
-    # end
-  end
-
-  def print_options
-  # shows list of options for user
-      # 1. Show menu #lists out menu items and prices
-      # 2. Choose dishes #takes user input and stores choices in array / hash? 
-      # keeps asking if anything else is needed until user inputs "no"
-      # 3. Remove dish #takes user input and removes element from hash
-      # 4. See order #returns total and breakdown
-      # 5. Submit order #returns success message and sends text message
+    # @dish, @customer, @order, @receipt, @menu??
   end
 
   def show_menu
-  # prints out menu
+    # returns dishes in menu
   end
 
-  def place_order
-  # process menu input
+  def show_receipt
+    # returns customer and order details
+  end
+
+  def send_sms
+    # sends SMS
+  end
+end
+
+class Order
+
+  def initialize
+  # @dishes, @total????
+  end
+
+  def add_dish(dish)
+  # add new dish instance to dishes
+  end
+
+  def show_order
+  # returns dishes
   end
 
 end
 
-class OrderProcessor
+class Dish
+
   def initialize
-  # initialise as empty hash?
+  # @name, @price
   end
 
-  def add
-  # add new item to order
+  def name
+  # returns name of dish
   end
 
-  def remove
-  # remove item from order
+  def price
+  # returns price of dish
   end
 
-  def display
-  # display items currently in order
-  end
 end
 
-class ReceiptGenerator
+class Customer
+
   def initialize
-  # initialize with instance of Order?
+  # @name, @mobile
   end
 
-  def total
-  # totals up items in Order <- does this belong here?
+  def name
+  # returns name of customer
   end
 
-  def output
-  # outputs itemised list
+  def mobile
+  # returns mobile number of customer
   end
+
 end
 
-class SMSSender
+class Receipt
   def initialize
-  # initialize with instance of Order?
+  # @order, @menu
   end
 
-  def send
-  # sends confirmation message
+  def order
+  # returns order details
+  end
+
+  def menu
+  # returns menu details
+  # DO I WANT TO USE THIS AND NOT HAVE PRICES IN ORDER AND DISH?
+  end
+
+  def generate_total
+  # returns itemised breakdown and total
+  end
+
+end
+
+class SMS
+  def initialize
+  # @customer
+  end
+  
+  def text
+  # returns text message
   end
 
 end

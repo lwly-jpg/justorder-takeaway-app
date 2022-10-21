@@ -1,5 +1,3 @@
-## name of dish, price of dish
-
 require 'dish'
 
 describe Dish do
