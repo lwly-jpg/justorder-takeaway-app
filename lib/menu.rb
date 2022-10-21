@@ -3,8 +3,8 @@ class Menu
     @menu = {}
   end
 
-  def add_dish(name, price)
-    @menu[name] = price
+  def add_dish(dish)
+    @menu.store(dish.name, dish.price)
   end
 
   def show_menu

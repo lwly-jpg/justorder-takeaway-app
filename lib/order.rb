@@ -1,20 +1,20 @@
 class Order
   def initialize
-    @order = []
+    @order = {}
     @total = 0
   end
 
   def add_dish(dish)
-    @order << dish
+    @order.store(dish.name, dish.price)
   end
 
   def generate_total
-    @total = @order.map { |item| item.price}.sum
+    @total = @order.map { |name, price| price}.sum
   end
 
   def format_order
-    formated_order = @order.map do |item|
-      "#{item.name.capitalize} : £#{"%.2f" % item.price}"
+    formated_order = @order.map do |name, price|
+      "#{name.capitalize} : £#{"%.2f" % price}"
     end
   end
 
