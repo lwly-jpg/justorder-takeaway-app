@@ -37,20 +37,22 @@ describe Takeaway do
       new_customer.process_input("1")
     end
 
-    it 'returns user order input' do
-      terminal = double :terminal
-      expect(terminal).to receive(:puts).with("Input what item you'd like to order:")
-      expect(terminal).to receive(:gets).and_return("burger")
-      expect(terminal).to receive(:puts).with("1 x Burger added to your order")
-      new_customer = Takeaway.new(terminal)
-      new_customer.add_item
-    end
+
+    # it 'returns user order input' do
+    #   terminal = double :terminal
+    #   expect(terminal).to receive(:puts).with("Input what item you'd like to order:")
+    #   expect(terminal).to receive(:gets).and_return("burger")
+    #   expect(terminal).to receive(:puts).with("1 x Burger added to your order. Anything else (Y/N)?")
+    #   new_customer = Takeaway.new(terminal)
+    #   new_customer.add_item
+    # end
 
     it 'adds one item to order list' do
       terminal = double :terminal
       expect(terminal).to receive(:puts).with("Input what item you'd like to order:")
       expect(terminal).to receive(:gets).and_return("burger")
-      expect(terminal).to receive(:puts).with("1 x Burger added to your order")
+      expect(terminal).to receive(:puts).with("1 x Burger added to your order. Anything else (Y/N)?")
+      expect(terminal).to receive(:gets).and_return("N")
       new_customer = Takeaway.new(terminal)
       new_customer.add_item
       expect(terminal).to receive(:puts).with("Burger : £2.00").ordered
@@ -61,16 +63,39 @@ describe Takeaway do
       terminal = double :terminal
       expect(terminal).to receive(:puts).with("Input what item you'd like to order:")
       expect(terminal).to receive(:gets).and_return("burger")
-      expect(terminal).to receive(:puts).with("1 x Burger added to your order")
-      new_customer = Takeaway.new(terminal)
-      new_customer.add_item
+      expect(terminal).to receive(:puts).with("1 x Burger added to your order. Anything else (Y/N)?")
+      expect(terminal).to receive(:gets).and_return("Y")
       expect(terminal).to receive(:puts).with("Input what item you'd like to order:")
       expect(terminal).to receive(:gets).and_return("pizza")
-      expect(terminal).to receive(:puts).with("1 x Pizza added to your order")
-      new_customer.add_item
+      expect(terminal).to receive(:puts).with("1 x Pizza added to your order. Anything else (Y/N)?")
+      expect(terminal).to receive(:gets).and_return("Y")
       expect(terminal).to receive(:puts).with("Input what item you'd like to order:")
       expect(terminal).to receive(:gets).and_return("salad")
-      expect(terminal).to receive(:puts).with("1 x Salad added to your order")
+      expect(terminal).to receive(:puts).with("1 x Salad added to your order. Anything else (Y/N)?")
+      expect(terminal).to receive(:gets).and_return("N")
+      new_customer = Takeaway.new(terminal)
+      new_customer.add_item
+      expect(terminal).to receive(:puts).with("Burger : £2.00").ordered
+      expect(terminal).to receive(:puts).with("Pizza : £3.00").ordered
+      expect(terminal).to receive(:puts).with("Salad : £2.00").ordered
+      new_customer.show_order
+    end
+
+    it 'adds multiple items to order list' do
+      terminal = double :terminal
+      expect(terminal).to receive(:puts).with("Input what item you'd like to order:")
+      expect(terminal).to receive(:gets).and_return("burger")
+      expect(terminal).to receive(:puts).with("1 x Burger added to your order. Anything else (Y/N)?")
+      expect(terminal).to receive(:gets).and_return("Y")
+      new_customer = Takeaway.new(terminal)
+      expect(terminal).to receive(:puts).with("Input what item you'd like to order:")
+      expect(terminal).to receive(:gets).and_return("pizza")
+      expect(terminal).to receive(:puts).with("1 x Pizza added to your order. Anything else (Y/N)?")
+      expect(terminal).to receive(:gets).and_return("Y")
+      expect(terminal).to receive(:puts).with("Input what item you'd like to order:")
+      expect(terminal).to receive(:gets).and_return("salad")
+      expect(terminal).to receive(:puts).with("1 x Salad added to your order. Anything else (Y/N)?")
+      expect(terminal).to receive(:gets).and_return("N")
       new_customer.add_item
       expect(terminal).to receive(:puts).with("Burger : £2.00").ordered
       expect(terminal).to receive(:puts).with("Pizza : £3.00").ordered
@@ -89,12 +114,13 @@ describe Takeaway do
       new_customer.takeaway_options
       expect(terminal).to receive(:puts).with("Input what item you'd like to order:").ordered
       expect(terminal).to receive(:gets).and_return("burger").ordered
-      expect(terminal).to receive(:puts).with("1 x Burger added to your order").ordered
-      new_customer.process_input("2")
+      expect(terminal).to receive(:puts).with("1 x Burger added to your order. Anything else (Y/N)?").ordered
+      expect(terminal).to receive(:gets).and_return("Y")
       expect(terminal).to receive(:puts).with("Input what item you'd like to order:").ordered
       expect(terminal).to receive(:gets).and_return("pizza").ordered
-      expect(terminal).to receive(:puts).with("1 x Pizza added to your order").ordered
-      new_customer.add_item
+      expect(terminal).to receive(:puts).with("1 x Pizza added to your order. Anything else (Y/N)?").ordered
+      expect(terminal).to receive(:gets).and_return("N")
+      new_customer.process_input("2")
       expect(terminal).to receive(:puts).with("Burger : £2.00").ordered
       expect(terminal).to receive(:puts).with("Pizza : £3.00").ordered
       new_customer.process_input("3")

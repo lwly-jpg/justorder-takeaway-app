@@ -46,10 +46,16 @@ class Takeaway
 
   def add_item
   # Gets user input, returns confirmation and adds item to order list
-    @terminal.puts "Input what item you'd like to order:"
-    item_selection = @terminal.gets.chomp.downcase
-    @terminal.puts "1 x #{item_selection.capitalize} added to your order"
-    @order[item_selection] = @menu[item_selection]
+    loop do
+      @terminal.puts "Input what item you'd like to order:"
+      item_selection = @terminal.gets.chomp.downcase
+      @order[item_selection] = @menu[item_selection]
+      @terminal.puts "1 x #{item_selection.capitalize} added to your order. Anything else (Y/N)?"
+      continue = @terminal.gets.chomp.upcase
+      if continue == 'N'
+        break
+      end
+    end 
   end
 
   def show_order
@@ -61,5 +67,5 @@ class Takeaway
 end
 
 ## Code to run program ##
-my_order = Takeaway.new(Kernel)
-my_order.interactive_menu
+# my_order = Takeaway.new(Kernel)
+# my_order.interactive_menu
