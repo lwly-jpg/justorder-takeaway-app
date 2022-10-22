@@ -1,4 +1,5 @@
 class Basket
+  
   def initialize
     @basket = {}
     @total = 0

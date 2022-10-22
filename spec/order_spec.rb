@@ -19,5 +19,15 @@ describe Order do
       expect(new_order.show_order).to eq "Pizza : £3.00, Burger : £2.50. Total: £5.50"
     end
   end
+
+  context 'when new menu is added' do
+    it 'returns menu contents' do
+      new_menu = double(:new_menu)
+      allow(new_menu).to receive(:show_menu).and_return(["Pizza : £3.00", "Burger : £2.50", "Salad : £1.50"])
+      new_customer = double(:new_customer, name: "Potter", mobile: "07890987651")
+      new_order = Order.new(new_customer)
+      expect(new_order.show_menu(new_menu)).to eq ["Pizza : £3.00", "Burger : £2.50", "Salad : £1.50"]
+    end
+  end
 end
 
