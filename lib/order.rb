@@ -1,25 +1,20 @@
 class Order
-  def initialize
-    @order = {}
-    @total = 0
+
+  def initialize(customer)
+    @customer = customer
+    @basket = []
   end
 
-  def add_dish(dish)
-    @order.store(dish.name, dish.price)
+  def show_customer
+    return "Name: #{@customer.name}, Mobile: #{@customer.mobile}"
   end
 
-  def generate_total
-    @total = @order.map { |name, price| price}.sum
-  end
-
-  def format_order
-    formated_order = @order.map do |name, price|
-      "#{name.capitalize} : £#{"%.2f" % price}"
-    end
+  def add_basket(basket)
+    @basket = basket
   end
 
   def show_order
-    "#{format_order.join(", ")}. Total: £#{"%.2f" % @total}" 
+    return @basket.show_basket
   end
 
 end

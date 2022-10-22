@@ -10,9 +10,18 @@ As a customer so that I can
 
 ```ruby
 
-class Takeaway
-  def initialize
-    # @dish, @customer, @order, @receipt, @menu??
+class Order
+  def initialize(menu)
+
+    # @dish, @customer, @order, @receipt, @menu = menu
+  end
+
+  def query_customer
+  # returns customer details
+  end
+
+  def add_menu
+  # adds menu
   end
 
   def show_menu
@@ -28,7 +37,7 @@ class Takeaway
   end
 end
 
-class Order
+class Basket
 
   def initialize
   # @dishes, @total????
@@ -129,12 +138,13 @@ combinations that reflect the ways in which the system will be used._
 # Sends SMS to user after order has been processed
 ```
 
-## 4. Unit Tests
+## TODO
 
-_Create examples, where appropriate, of the behaviour of each relevant class at
-a more granular level of detail._
+```
+# Make Order and Menu work together - add_item in Order fails if item is not added to Menu
 
-```ruby
-# EXAMPLE
+# Takeaway that brings all together (via terminal?)
+# Integration tests for Order and Dish
+# Integration tests for Menu and Dish
 
-``
+```

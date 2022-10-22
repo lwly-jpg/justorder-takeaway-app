@@ -1,40 +1,23 @@
 require 'order'
 
 describe Order do
-  context 'when dishes are added' do
-    it 'returns a single dish as formatted string' do
-      new_order = Order.new
-      pizza_dish = double(:pizza_dish, name: "pizza", price: 3.0)
-      new_order.add_dish(pizza_dish)
-      expect(new_order.format_order).to eq ["Pizza : £3.00"]
+  context 'when new customer is added' do
+    it 'returns customer details' do
+      new_customer = double(:new_customer, name: "Potter", mobile: "07890987651")
+      new_order = Order.new(new_customer)
+      expect(new_order.show_customer).to eq "Name: Potter, Mobile: 07890987651"
     end
+  end
 
-    it 'returns multiple dishes as formatted strings' do
-      new_order = Order.new
-      pizza_dish = double(:pizza_dish, name: "pizza", price: 3.0)
-      burger_dish = double(:burger_dish, name: "burger", price: 2.5)
-      new_order.add_dish(pizza_dish)
-      new_order.add_dish(burger_dish)
-      expect(new_order.format_order).to eq ["Pizza : £3.00", "Burger : £2.50"]
-    end
-
-    it 'generates total price of dishes in order' do
-      new_order = Order.new
-      pizza_dish = double(:pizza_dish, name: "pizza", price: 3.0)
-      burger_dish = double(:burger_dish, name: "burger", price: 2.5)
-      new_order.add_dish(pizza_dish)
-      new_order.add_dish(burger_dish)
-      expect(new_order.generate_total).to eq 5.5
-    end
-
-    it 'prints total price and dishes items in order' do
-      new_order = Order.new
-      pizza_dish = double(:pizza_dish, name: "pizza", price: 3.0)
-      burger_dish = double(:burger_dish, name: "burger", price: 2.5)
-      new_order.add_dish(pizza_dish)
-      new_order.add_dish(burger_dish)
-      new_order.generate_total
-      expect(new_order.show_order).to eq ("Pizza : £3.00, Burger : £2.50. Total: £5.50")
+  context 'when new basket is added' do
+    it 'returns basket details' do
+      new_basket = double(:new_basket)
+      allow(new_basket).to receive(:show_basket).and_return("Pizza : £3.00, Burger : £2.50. Total: £5.50")
+      new_customer = double(:new_customer, name: "Potter", mobile: "07890987651")
+      new_order = Order.new(new_customer)
+      new_order.add_basket(new_basket)
+      expect(new_order.show_order).to eq "Pizza : £3.00, Burger : £2.50. Total: £5.50"
     end
   end
 end
+
