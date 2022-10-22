@@ -1,8 +1,14 @@
-require_relative 'dish'
+require 'dish'
 
 class Menu
   def initialize
-    @menu = {}
+    @menu = {
+      "pasta" => 2.5,
+      "chips" => 1.0,
+      "olives" => 0.5,
+      "pizza" => 3.0,
+      "burger" => 2.5
+    }
   end
 
   def add_dish(dish)
@@ -10,17 +16,18 @@ class Menu
   end
 
   def show_menu
-    formated_menu = @menu.map do |item, price|
-      "#{item.capitalize} : £#{"%.2f" % price}"
+    return formated_menu = @menu.map do |item, price|
+      "#{item.capitalize} : £#{"%.2f" % price.to_f}"
     end
   end
 end
 
-# Code to populate menu with dishes
-pasta = Dish.new("pasta", 2.5)
-chips = Dish.new("chips", 1.0)
-olives = Dish.new("olives", 0.5)
-default_menu = Menu.new
-default_menu.add_dish(pasta)
-default_menu.add_dish(chips)
-default_menu.add_dish(olives)
+# Example code to populate menu with dishes
+# new_menu = Menu.new
+# pizza = Dish.new("pizza", 3.0)
+# burger = Dish.new("burger", 2.5)
+# salad = Dish.new("salad", 1.5)
+# new_menu.add_dish(pizza)
+# new_menu.add_dish(burger)
+# new_menu.add_dish(salad)
+# new_menu.show_menu

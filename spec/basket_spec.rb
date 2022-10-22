@@ -36,5 +36,13 @@ describe Basket do
       new_basket.generate_total
       expect(new_basket.show_basket).to eq ("Pizza : £3.00, Burger : £2.50. Total: £5.50")
     end
+
+    it 'raises error when item does not exist on menu' do
+      new_basket = Basket.new
+      pizza_dish = double(:pizza_dish, name: "pizza", price: 3.0)
+      rice_dish = double(:rice_dish, name: "rice", price: 2.5)
+      new_basket.add_dish(pizza_dish)
+      expect {new_basket.add_dish(rice_dish)}.to raise_error "Invalid - dish is not on the menu."
+    end
   end
 end

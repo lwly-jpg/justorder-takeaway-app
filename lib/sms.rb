@@ -5,8 +5,7 @@ Dotenv.load('twilio.env')
 
 class SMS
 
-  def initialize(requester, customer)
-    @requester = requester
+  def initialize(customer)
     @customer = customer
     @client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_ACCOUNT_AUTH_TOKEN'])
   end
@@ -27,5 +26,5 @@ end
 
 ### RUN CODE ###
 # test_customer = Customer.new('Harry', '+447777777777')
-# test = SMS.new(Kernel, test_customer)
+# test = SMS.new(test_customer)
 # test.send_sms

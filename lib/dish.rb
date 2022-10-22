@@ -13,7 +13,7 @@ class Dish
   end
 
   def format_dish
-    return "#{@name.capitalize} : £#{"%.2f" % @price}"
+    return "#{@name.capitalize} : £#{"%.2f" % @price.to_f}"
   end
 
 end
