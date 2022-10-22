@@ -2,3 +2,4 @@ terminal.rb
 terminal_spec.rb
 receipt.rb
 receipt_spec.rb
+*.env
