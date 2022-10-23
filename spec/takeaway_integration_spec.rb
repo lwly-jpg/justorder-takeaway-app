@@ -30,8 +30,9 @@ describe 'integration tests' do
       pizza_dish = Dish.new("pizza", 3.0)
       burger_dish = Dish.new("burger", 2.5)
       new_order.add_dish(pizza_dish)
+      new_order.add_dish(pizza_dish)
       new_order.add_dish(burger_dish)
-      expect(new_order.show_basket).to eq "Pizza : £3.00, Burger : £2.50. Total: £5.50"
+      expect(new_order.show_basket).to eq "Pizza x 1 @ £3.00, Pizza x 1 @ £3.00, Burger x 1 @ £2.50. Total: £8.50"
     end
 
     it 'raises error when item does not exist on menu' do
