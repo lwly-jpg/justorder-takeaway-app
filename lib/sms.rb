@@ -14,7 +14,7 @@ class SMS
     @client.messages.create(
     from: ENV['TWILIO_TEST_MOBILE_NUMBER'], # Twilio mobile number
     to: @customer.mobile, # Customer mobile number
-    body: "Hey #{@customer.name}, your order will be delivered at #{calculate_delivery_time(Time.now)}"
+    body: "Hey #{@customer.name}, your order was placed and will be delivered at #{calculate_delivery_time(Time.now)}"
     )
   end
 

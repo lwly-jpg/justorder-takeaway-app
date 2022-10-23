@@ -1,8 +1,8 @@
-require_relative 'basket'
 require_relative 'customer'
 require_relative 'dish'
-require_relative 'menu'
 require_relative 'sms'
+require 'dotenv'
+Dotenv.load('twilio.env')
 
 class Order
 
@@ -14,6 +14,7 @@ class Order
       "pizza" => 3.0,
       "burger" => 2.5
     }
+
     @customer = customer
     @basket = {}
     @total = 0
@@ -39,6 +40,13 @@ class Order
     generate_total
     return "#{format_basket.join(", ")}. Total: £#{"%.2f" % @total}"
   end
+
+  def submit_order
+    fail "Basket empty - cannot submit empty order." if @basket.empty?
+    new_sms = SMS.new(@customer)
+    new_sms.send_sms
+  end
+
 
   private
 
