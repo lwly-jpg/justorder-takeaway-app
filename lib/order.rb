@@ -1,5 +1,4 @@
 require_relative 'customer'
-require_relative 'dish'
 require_relative 'sms'
 require 'dotenv'
 Dotenv.load('twilio.env')

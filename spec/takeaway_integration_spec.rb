@@ -1,5 +1,4 @@
 require 'customer'
-require 'dish'
 require 'order'
 require 'sms'
 require 'dotenv'
