@@ -31,7 +31,7 @@ class Order
   def add_dish(dish)
   # Adds dish name and price to basket, raises error if dish is off menu
     fail "Invalid - dish is not on the menu." unless @menu.has_key?(dish.name)
-    @basket.store("#{dish.name}", dish.price)
+    @basket.store(dish.name, dish.price)
   end
 
   def show_basket
