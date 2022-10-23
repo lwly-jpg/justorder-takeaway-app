@@ -4,12 +4,12 @@ describe Dish do
   context 'it initially' do
     it 'returns name of dish as formatted string' do
       new_dish = Dish.new("pizza", 3.0)
-      expect(new_dish.name).to eq "Pizza"
+      expect(new_dish.name).to eq "pizza"
     end
 
     it 'returns price of dish as formatted string' do
       new_dish = Dish.new("pizza", 3.0)
-      expect(new_dish.price).to eq "£3.00"
+      expect(new_dish.price).to eq 3.0
     end
 
     it 'returns name and price of dish together as formatted string' do

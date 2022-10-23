@@ -26,10 +26,6 @@ class Order
     end
   end
 
-  def show_customer
-    return "Name: #{@customer.name}, Mobile: #{@customer.mobile}"
-  end
-
   def add_dish(dish)
     fail "Invalid - dish is not on the menu." unless @menu.has_key?(dish.name)
     @basket.store(dish.name, dish.price)
@@ -45,6 +41,7 @@ class Order
     fail "Basket empty - cannot submit empty order." if @basket.empty?
     new_sms = SMS.new(@customer)
     new_sms.send_sms
+    return "Thanks for your order, #{@customer.name}. You will receive a confirmation text to your number: #{@customer.mobile}."
   end
 
 

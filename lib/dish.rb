@@ -5,11 +5,11 @@ class Dish
   end
 
   def name
-    return @name.capitalize
+    return @name
   end
 
   def price
-    return "£#{"%.2f" % @price}"
+    return @price
   end
 
   def format_dish

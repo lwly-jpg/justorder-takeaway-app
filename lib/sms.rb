@@ -16,6 +16,7 @@ class SMS
     to: @customer.mobile, # Customer mobile number
     body: "Hey #{@customer.name}, your order was placed and will be delivered at #{calculate_delivery_time(Time.now)}"
     )
+    return "Text sent successfully."
   end
 
   def calculate_delivery_time(current_time)
