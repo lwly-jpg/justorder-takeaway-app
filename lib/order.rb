@@ -34,6 +34,14 @@ class Order
     @total += @menu[dish]
   end
 
+  def check_stock(dish)
+    @menu.has_key?(dish)
+  end
+
+  def check_basket
+    @basket.empty?
+  end
+
   def show_basket
   # Returns string of formatted basket list together with grand total
     fail "Empty basket! Add at least one dish first." if @basket.empty?
@@ -45,7 +53,6 @@ class Order
     fail "Basket empty - cannot submit empty order." if @basket.empty?
     new_sms = SMS.new(@customer)
     new_sms.send_sms
-    return "Thanks for your order, #{@customer.name}. You will receive a confirmation text to your number: #{@customer.mobile}."
   end
 
 end
