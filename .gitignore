@@ -6,4 +6,5 @@ basket.rb
 basket_spec.rb
 menu.rb
 menu_spec.rb
+archive
 *.env
