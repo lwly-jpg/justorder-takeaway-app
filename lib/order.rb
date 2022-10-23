@@ -30,9 +30,9 @@ class Order
 
   def add_dish(dish)
   # Adds dish name and price to basket, raises error if dish is off menu
-    fail "Invalid - dish is not on the menu." unless @menu.has_key?(dish.name)
-    @basket << "#{dish.name.capitalize} x 1 @ £#{"%.2f" % dish.price.to_f}"
-    @total += dish.price
+    fail "Invalid - dish is not on the menu." unless @menu.has_key?(dish)
+    @basket << "#{dish.downcase.capitalize} x 1 @ £#{"%.2f" % @menu[dish].to_f}"
+    @total += @menu[dish]
   end
 
   def show_basket
