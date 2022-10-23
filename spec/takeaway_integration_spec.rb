@@ -27,21 +27,16 @@ describe 'integration tests' do
     it 'returns multiple dishes as formatted strings with correct total' do
       new_customer = Customer.new("Potter", "07890987651")
       new_order = Order.new(new_customer)
-      pizza_dish = Dish.new("pizza", 3.0)
-      burger_dish = Dish.new("burger", 2.5)
-      new_order.add_dish(pizza_dish)
-      new_order.add_dish(pizza_dish)
-      new_order.add_dish(burger_dish)
+      new_order.add_dish("pizza")
+      new_order.add_dish("pizza")
+      new_order.add_dish("burger")
       expect(new_order.show_basket).to eq "Pizza x 1 @ £3.00, Pizza x 1 @ £3.00, Burger x 1 @ £2.50. Total: £8.50"
     end
 
     it 'raises error when item does not exist on menu' do
       new_customer = Customer.new("Potter", "07890987651")
       new_order = Order.new(new_customer)
-      pizza_dish = Dish.new("pizza", 3.0)
-      rice_dish = Dish.new("rice", 2.5)
-      new_order.add_dish(pizza_dish)
-      expect {new_order.add_dish(rice_dish)}.to raise_error "Invalid - dish is not on the menu."
+      expect {new_order.add_dish("rice")}.to raise_error "Invalid - dish is not on the menu."
     end
 
   end
@@ -51,8 +46,7 @@ describe 'integration tests' do
     it 'sends SMS to confirm' do
       new_customer = Customer.new("Potter", ENV['MY_NUM']) # note test FAILS unless phone number is verified in Twilio account!
       new_order = Order.new(new_customer)
-      pizza_dish = Dish.new("pizza", 3.0)
-      new_order.add_dish(pizza_dish)
+      new_order.add_dish("pizza")
       test_sms = SMS.new(new_customer)
       expect(new_order.submit_order).to eq "Thanks for your order, Potter. You will receive a confirmation text to your number: #{ENV['MY_NUM']}."
     end
