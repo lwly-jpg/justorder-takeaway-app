@@ -17,7 +17,7 @@ class Order
     }
 
     @customer = customer
-    @basket = {}
+    @basket = []
     @total = 0
   end
 
@@ -31,14 +31,14 @@ class Order
   def add_dish(dish)
   # Adds dish name and price to basket, raises error if dish is off menu
     fail "Invalid - dish is not on the menu." unless @menu.has_key?(dish.name)
-    @basket.store(dish.name, dish.price)
+    @basket << "#{dish.name.capitalize} x 1 @ £#{"%.2f" % dish.price.to_f}"
+    @total += dish.price
   end
 
   def show_basket
   # Returns string of formatted basket list together with grand total
     fail "Empty basket! Add at least one dish first." if @basket.empty?
-    generate_total
-    return "#{format_basket.join(", ")}. Total: £#{"%.2f" % @total}"
+    return "#{@basket.join(", ")}. Total: £#{"%.2f" % @total}"
   end
 
   def submit_order
@@ -47,21 +47,6 @@ class Order
     new_sms = SMS.new(@customer)
     new_sms.send_sms
     return "Thanks for your order, #{@customer.name}. You will receive a confirmation text to your number: #{@customer.mobile}."
-  end
-
-
-  private
-
-  def format_basket
-  # Formats dish item names with capitals and price to GBP
-    formated_basket = @basket.map do |name, price|
-      "#{name.capitalize} : £#{"%.2f" % price.to_f}"
-    end
-  end
-
-  def generate_total
-  # Adds up price of each dish in basket
-    @total = @basket.map { |name, price| price}.sum
   end
 
 end
